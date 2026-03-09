@@ -8,7 +8,6 @@
 
 **PrithviPhal** is a full-stack web application that helps farmers predict crop yield using machine learning. Farmers enter basic farm details like crop type, season, state, area, fertilizer, and pesticide usage. The system automatically fetches real-time rainfall data and runs it through a trained ML model to estimate yield in **tons per hectare**.
 
-Built as part of Mini Project — Final Review at **B V Raju Institute of Technology (BVRIT)**, Department of Computer Science and Engineering.
 
 ---
 
@@ -160,17 +159,6 @@ REACT_APP_FIREBASE_PROJECT_ID=your_project_id
 ```
 
 > ⚠️ Never push `.env` files or `firebaseServiceAccountKey.json` to GitHub.
-
----
-
-## 👩‍💻 Developed By
-
-| Name | Roll Number |
-|---|---|
-| P. Sri Nithya | 23211A05N0 |
-
-**Guided By:** Mrs. G. Prathyusha, Assistant Professor
-**Institution:** B V Raju Institute of Technology (BVRIT), CSE Department
 
 ---
 
