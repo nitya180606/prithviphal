@@ -9,8 +9,12 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
-model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
-encoders = joblib.load(os.path.join(BASE_DIR, "encoders.pkl"))
+try:
+    model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+    encoders = joblib.load(os.path.join(BASE_DIR, "encoders.pkl"))
+    print("✅ Model and encoders loaded successfully")
+except Exception as e:
+    print("❌ Error loading model:", e)
 
 @app.route("/")
 def home():
