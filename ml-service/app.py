@@ -5,8 +5,12 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 # Load model and encoders
-model = joblib.load("model.pkl")
-encoders = joblib.load("encoders.pkl")
+import os
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+model = joblib.load(os.path.join(BASE_DIR, "model.pkl"))
+encoders = joblib.load(os.path.join(BASE_DIR, "encoders.pkl"))
 
 @app.route("/")
 def home():
