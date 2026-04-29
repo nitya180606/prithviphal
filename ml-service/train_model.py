@@ -12,6 +12,7 @@ df = pd.read_csv("crop_yield_final.csv")
 for column in ['Crop', 'Season', 'State']:
     df[column] = df[column].str.strip()
 
+
 # Encode categorical columns
 label_encoders = {}
 

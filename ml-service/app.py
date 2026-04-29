@@ -1,9 +1,9 @@
 from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
-
+from flask_cors import CORS
 app = Flask(__name__)
-
+CORS(app)
 # Load model and encoders
 model = joblib.load("model.pkl")
 encoders = joblib.load("encoders.pkl")
@@ -63,4 +63,4 @@ def predict():
         "predicted_yield": float(prediction[0])
     })
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(host="0.0.0.0", port=10000)
