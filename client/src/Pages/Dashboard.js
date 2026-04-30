@@ -94,7 +94,7 @@ export default function Dashboard() {
     setPredicting(true);
     try {
       const token = await user.getIdToken();
-      const response = await axios.post("http://localhost:5000/predict", formData, {
+      const response = await axios.post("https://prithviphal-backend.onrender.com/predict", formData, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setResult(response.data);

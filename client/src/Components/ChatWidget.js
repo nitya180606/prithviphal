@@ -19,7 +19,7 @@ const ChatWidget = () => {
   try {
     console.log("Sending to backend:", currentInput); // 👈 check this prints
 
-    const res = await fetch("http://localhost:5000/api/chat", {
+    const res = await fetch("https://prithviphal-backend.onrender.com/api/chat", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ message: currentInput }),
