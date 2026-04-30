@@ -1,3 +1,4 @@
+console.log("PK START:", JSON.stringify(process.env.FIREBASE_PRIVATE_KEY?.substring(0, 60)));
 require("dotenv").config();
 const Groq = require("groq-sdk");
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
