@@ -9,7 +9,10 @@ const cors = require("cors");
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || "*"
+  origin: [
+    "http://localhost:3000",
+    "https://prithviphal-frontend.onrender.com"
+  ]
 }));
 app.use(express.json());
 
