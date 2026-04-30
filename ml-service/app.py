@@ -2,10 +2,10 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 from flask_cors import CORS
+import os
+
 app = Flask(__name__)
 CORS(app)
-# Load model and encoders
-import os
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -18,57 +18,34 @@ except Exception as e:
 
 @app.route("/")
 def home():
-    return "Flask ML Home Running"
-    
+    return "Flask ML Service Running"
+
 @app.route("/test")
 def test():
     return "ML Service Running"
 
-
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.json
-
     input_df = pd.DataFrame([data])
 
     for column in ['Crop', 'Season', 'State']:
         input_df[column] = input_df[column].str.strip()
 
-    # 🔥 ADD THIS BLOCK HERE (VERY IMPORTANT)
-    numeric_columns = [
-        'Year',
-        'Area',
-        'Annual_Rainfall',
-        'Fertilizer',
-        'Pesticide',
-        'Soil_Moisture'
-    ]
-    # Convert numeric columns to appropriate data types
+    numeric_columns = ['Year', 'Area', 'Annual_Rainfall', 'Fertilizer', 'Pesticide', 'Soil_Moisture']
     for column in numeric_columns:
         input_df[column] = pd.to_numeric(input_df[column], errors='coerce')
 
-    # Encode
     for column in ['Crop', 'Season', 'State']:
         input_df[column] = encoders[column].transform(input_df[column])
-    # Ensure correct feature order
-    feature_order = [
-        'Crop',
-        'Year',
-        'Season',
-        'State',
-        'Area',
-        'Annual_Rainfall',
-        'Fertilizer',
-        'Pesticide',
-        'Soil_Moisture'
-    ]
 
+    feature_order = ['Crop', 'Year', 'Season', 'State', 'Area', 'Annual_Rainfall', 'Fertilizer', 'Pesticide', 'Soil_Moisture']
     input_df = input_df[feature_order]
 
     prediction = model.predict(input_df)
 
-    return jsonify({
-        "predicted_yield": float(prediction[0])
-    })
+    return jsonify({"predicted_yield": float(prediction[0])})
+
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=10000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
